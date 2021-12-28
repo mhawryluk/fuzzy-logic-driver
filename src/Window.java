@@ -12,7 +12,7 @@ public class Window extends JFrame {
 
         setVisible(true);
 
-        this.panel = new Panel(1500, 800);
+        this.panel = new Panel(800, 800);
         add(panel);
 
         pack();

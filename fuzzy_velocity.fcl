@@ -1,0 +1,76 @@
+FUNCTION_BLOCK
+
+VAR_INPUT
+position : REAL;
+chaserDist : REAL;
+END_VAR
+VAR_OUTPUT
+velocity_change : REAL;
+END_VAR
+
+FUZZIFY position
+TERM veryCloseLeft := (0, 1) (25, 1) (50, 0);
+TERM closeLeft := (25, 0) (100, 1) (150, 1) (200, 0);
+TERM middle := (50, 0) (200, 1) (600, 1) (750, 0);
+TERM closeRight := (600, 0) (650, 1) (700, 1) (775, 0);
+TERM veryCloseRight := (750, 0) (775, 1) (800, 1);
+END_FUZZIFY
+
+FUZZIFY chaserDist
+TERM veryCloseLeft := (-125, 0) (-100, 1) (-25, 1) (0, 0);
+TERM closeLeft := (-200, 0) (-150, 1) (-125, 1) (-100, 0);
+TERM middle := (-400, 1) (-200, 1) (-100, 0) (100, 0) (200, 1) (400, 1);
+TERM closeRight := (100, 0) (125, 150, 1) (200, 0)
+TERM veryCloseRight := (0, 0) (25, 1) (100, 1) (125, 0);
+END_FUZZIFY
+
+
+DEFUZZIFY velocity_change
+TERM strongRight := (3, 0) (6, 0) (7, 0.50) (8, 1) (10, 1);
+TERM right := (3, 0) (6, 0) (7, 0.50) (8, 1) (10, 1);
+TERM stay := (3, 0) (6, 0) (7, 0.50) (8, 1) (10, 1);
+TERM left := (2, 0) (3, 0.50) (4, 1) (6, 1) (7, 0.50) (8, 0);
+TERM strongLeft := (0, 1) (2, 1) (3, 0.50) (4, 0) (7, 0);
+
+METHOD : COG;
+DEFAULT := 0;
+END_DEFUZZIFY
+
+
+RULEBLOCK first
+AND: MIN;
+ACT: MIN;
+
+RULE 0: IF position IS veryCloseLeft AND chaserDist IS veryCloseLeft THEN velocity_change IS strongRight;
+RULE 1: IF position IS closeLeft AND chaserDist IS veryCloseLeft THEN velocity_change IS strongRight;
+RULE 2: IF position IS middle AND chaserDist IS veryCloseLeft THEN velocity_change IS strongRight;
+RULE 3: IF position IS closeRight AND chaserDist IS veryCloseLeft THEN velocity_change IS stay;
+RULE 4: IF position IS veryCloseRight AND chaserDist IS veryCloseLeft THEN velocity_change IS strongLeft;
+
+RULE 5: IF position IS veryCloseLeft AND chaserDist IS closeLeft THEN velocity_change IS strongRight;
+RULE 6: IF position IS closeLeft AND chaserDist IS closeLeft THEN velocity_change IS right;
+RULE 7: IF position IS middle AND chaserDist IS closeLeft THEN velocity_change IS right;
+RULE 8: IF position IS closeRight AND chaserDist IS closeLeft THEN velocity_change IS stay;
+RULE 9: IF position IS veryCloseRight AND chaserDist IS closeLeft THEN velocity_change IS strongLeft;
+
+RULE 10: IF position IS veryCloseLeft AND chaserDist IS middle THEN velocity_change IS strongRight;
+RULE 11: IF position IS closeLeft AND chaserDist IS middle THEN velocity_change IS right;
+RULE 12: IF position IS middle AND chaserDist IS middle THEN velocity_change IS stay;
+RULE 13: IF position IS closeRight AND chaserDist IS middle THEN velocity_change IS left;
+RULE 14: IF position IS veryCloseRight AND chaserDist IS middle THEN velocity_change IS strongLeft;
+
+RULE 15: IF position IS veryCloseLeft AND chaserDist IS closeRight THEN velocity_change IS strongRight;
+RULE 16: IF position IS closeLeft AND chaserDist IS closeRight THEN velocity_change IS stay;
+RULE 17: IF position IS middle AND chaserDist IS closeRight THEN velocity_change IS left;
+RULE 18: IF position IS closeRight AND chaserDist IS closeRight THEN velocity_change IS left;
+RULE 19: IF position IS veryCloseRight AND chaserDist IS closeRight THEN velocity_change IS strongLeft;
+
+RULE 20: IF position IS veryCloseLeft AND chaserDist IS veryCloseRight THEN velocity_change IS strongRight;
+RULE 21: IF position IS closeLeft AND chaserDist IS veryCloseRight THEN velocity_change IS stay;
+RULE 22: IF position IS middle AND chaserDist IS veryCloseRight THEN velocity_change IS strongLeft;
+RULE 23: IF position IS closeRight AND chaserDist IS veryCloseRight THEN velocity_change IS strongLeft;
+RULE 24: IF position IS veryCloseRight AND chaserDist IS veryCloseRight THEN velocity_change IS strongLeft;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
