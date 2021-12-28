@@ -3,17 +3,14 @@ import java.awt.*;
 
 public class Runner {
 
-    protected int x = 100, y=100;
-    protected int velX = 1, velY = 1;
+    protected int x=100, y=100;
+    protected int velX = 0, velY = 0;
     public int width = 50;
     public int height = 50;
     protected Image pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
 
-    private FuzzyControl fuzzyController = new FuzzyControl();
+    private final FuzzyControl fuzzyController = new FuzzyControl();
 
-    public Runner(){
-
-    }
 
     public void move(){
         x += velX;
@@ -42,9 +39,9 @@ public class Runner {
         double velocityChangeY = fuzzyController.getVelocityChange(y, chaserY - y);
 
         if (!Double.isNaN(velocityChangeX) && !Double.isNaN(velocityChangeY)){
-            changeVelocity((int)(velocityChangeX/2), (int)(velocityChangeY/2));
+            changeVelocity((int)(velocityChangeX/4), (int)(velocityChangeY/4));
         }
 
-        System.out.println(velocityChangeX + " " + velocityChangeY);
+//        System.out.println(velocityChangeX + " " + velocityChangeY);
     }
 }
