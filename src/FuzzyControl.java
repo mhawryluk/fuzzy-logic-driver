@@ -6,9 +6,13 @@ public class FuzzyControl {
     private final FIS fis = FIS.load("fuzzy_velocity.fcl",false);
     FuzzyRuleSet fuzzyRuleSet = fis.getFuzzyRuleSet();
 
+    public FuzzyControl(){
+        fuzzyRuleSet.chart();
+    }
+
     public double getVelocityChange(int position, int chaserDist){
         fuzzyRuleSet.setVariable("position", position);
-        fuzzyRuleSet.setVariable("chaser_dist", chaserDist);
+        fuzzyRuleSet.setVariable("chaserDist", chaserDist);
 
         fuzzyRuleSet.evaluate();
 

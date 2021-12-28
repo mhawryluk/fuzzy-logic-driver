@@ -55,6 +55,7 @@ public class Panel extends JPanel implements ActionListener {
             runner.move();
             chaser.move();
             chaser.chase(runner.x, runner.y);
+            runner.fuzzyControl(chaser.getX(), chaser.getY());
         }
     }
 }

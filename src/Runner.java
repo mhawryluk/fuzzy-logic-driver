@@ -9,6 +9,8 @@ public class Runner {
     public int height = 50;
     protected Image pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
 
+    private FuzzyControl fuzzyController = new FuzzyControl();
+
     public Runner(){
 
     }
@@ -36,6 +38,13 @@ public class Runner {
     }
 
     public void fuzzyControl(int chaserX, int chaserY){
+        double velocityChangeX = fuzzyController.getVelocityChange(x, chaserX - x);
+        double velocityChangeY = fuzzyController.getVelocityChange(y, chaserY - y);
 
+        if (!Double.isNaN(velocityChangeX) && !Double.isNaN(velocityChangeY)){
+            changeVelocity((int)(velocityChangeX/2), (int)(velocityChangeY/2));
+        }
+
+        System.out.println(velocityChangeX + " " + velocityChangeY);
     }
 }
