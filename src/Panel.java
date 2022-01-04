@@ -11,6 +11,11 @@ public class Panel extends JPanel implements ActionListener {
     private final Runner runner;
     private final Chaser chaser;
     private final Timer timer;
+    private Coin coin = new Coin();
+    private int score = 0;
+
+    private final int fontSize = 50;
+    private final Font font = new Font(Font.SANS_SERIF, Font.BOLD, fontSize);
 
     public Panel(int width, int height) {
         this.width = width;
@@ -43,10 +48,20 @@ public class Panel extends JPanel implements ActionListener {
         g2D.fillRect(0, 0, this.width, this.height);
 
         // runner
-        g2D.drawImage(runner.getPic(), runner.getX(), runner.getY(), runner.width, runner.height, null, this);
+        g2D.drawImage(runner.pic, (int)Math.round(runner.getX()), (int)Math.round(runner.getY()), runner.width, runner.height, null, this);
 
         // chaser
-        g2D.drawImage(chaser.getPic(), chaser.getX(), chaser.getY(), chaser.width, chaser.height, null, this);
+        g2D.drawImage(chaser.pic, (int)Math.round(chaser.getX()), (int)Math.round(chaser.getY()), chaser.width, chaser.height, null, this);
+
+        //coin
+        if (coin != null){
+            g2D.drawImage(coin.pic, (int)Math.round(coin.getX()), (int)Math.round(coin.getY()), coin.width, coin.height, null, this);
+        }
+
+        // score
+        g2D.setPaint(new Color(255, 255, 255));
+        g2D.setFont(font);
+        g2D.drawString("score: "+score, 400, 750);
     }
 
     @Override
@@ -54,8 +69,23 @@ public class Panel extends JPanel implements ActionListener {
         if (e.getSource() == timer) {
             runner.move();
             chaser.move();
-            chaser.chase(runner.x, runner.y);
+            chaser.chase(runner.getX(), runner.getY());
+
+            runner.velX = 0;
+            runner.velY = 0;
+            runner.chase(coin.getX(), coin.getY());
             runner.fuzzyControl(chaser.getX(), chaser.getY());
+
+            if (runner.checkCollision(chaser.getX(), chaser.getY(), chaser.width, chaser.height)){
+                score -= 1;
+            }
+
+            if (runner.checkCollision(coin.getX(), coin.getY(), coin.width, coin.height)){
+                score += 1;
+                coin.changePosition();
+            }
+
+//            System.out.println(runner.velX + " " + runner.velY + " " + chaser.velX + " " + chaser.velY);
         }
     }
 }

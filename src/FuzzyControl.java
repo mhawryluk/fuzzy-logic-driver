@@ -10,7 +10,7 @@ public class FuzzyControl {
         fuzzyRuleSet.chart();
     }
 
-    public double getVelocityChange(int position, int chaserDist){
+    public double getVelocityChange(double position, double chaserDist){
         fuzzyRuleSet.setVariable("position", position);
         fuzzyRuleSet.setVariable("chaserDist", chaserDist);
 
