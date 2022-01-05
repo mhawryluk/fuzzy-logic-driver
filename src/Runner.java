@@ -3,11 +3,14 @@ import java.awt.*;
 
 public class Runner extends BoardObject{
 
-    public int width = 50;
-    public int height = 50;
-    protected Image pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
-
     private final FuzzyControl fuzzyController = new FuzzyControl();
+
+    public Runner(){
+        changePosition();
+        width = 50;
+        height = 50;
+        pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+    }
 
     public void fuzzyControl(double chaserX, double chaserY){
         double velocityChangeX = fuzzyController.getVelocityChange(x, chaserX - x);

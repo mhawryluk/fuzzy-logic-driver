@@ -7,7 +7,7 @@ public class BoardObject {
     public int width, height;
 
     public double velX = 0, velY = 0;
-    public final double velValue = 2;
+    public final double velValue = 4;
 
     public Image pic;
 
@@ -27,8 +27,8 @@ public class BoardObject {
     }
 
     public void changePosition(){
-        x = rand.nextInt(800);
-        y = rand.nextInt(800);
+        x = rand.nextInt(600) + 100;
+        y = rand.nextInt(600) + 100;
     }
 
     public void setPosition (double x, double y){

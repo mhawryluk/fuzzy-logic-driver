@@ -1,15 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Panel extends JPanel implements ActionListener {
 
     public final int width, height;
     private final Runner runner;
-    private final Chaser chaser;
+    private final ArrayList<Chaser> chasers = new ArrayList<>();
     private final Timer timer;
     private Coin coin = new Coin();
     private int score = 0;
@@ -25,8 +23,11 @@ public class Panel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(width, height));
         setLayout(null);
 
+        setFocusable(true);
+        requestFocus();
+
         this.runner = new Runner();
-        this.chaser = new Chaser();
+        chasers.add(new Chaser());
 
         timer = new Timer(50, this);
         timer.start();
@@ -34,7 +35,28 @@ public class Panel extends JPanel implements ActionListener {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                runner.setPosition(e.getX(), e.getY());
+                chasers.add(new Chaser(e.getX(), e.getY()));
+//                runner.setPosition(e.getX(), e.getY());
+            }
+        });
+
+        addKeyListener(new KeyListener(){
+
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyChar() == ' '){
+                    chasers.removeAll(chasers);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+
             }
         });
     }
@@ -43,16 +65,22 @@ public class Panel extends JPanel implements ActionListener {
         Graphics2D g2D = (Graphics2D) g;
         super.repaint();
 
+        if (!hasFocus()) requestFocus();
+
         // background
-        g2D.setPaint(new Color(137, 176, 174));
+        g2D.setPaint(new Color(50, 75, 74));
         g2D.fillRect(0, 0, this.width, this.height);
+
+        g2D.setPaint(new Color(137, 176, 174));
+        g2D.fillRect(50, 50, this.width-100, this.height-100);
 
         // runner
         g2D.drawImage(runner.pic, (int)Math.round(runner.getX()), (int)Math.round(runner.getY()), runner.width, runner.height, null, this);
 
         // chaser
-        g2D.drawImage(chaser.pic, (int)Math.round(chaser.getX()), (int)Math.round(chaser.getY()), chaser.width, chaser.height, null, this);
-
+        for (var chaser : chasers) {
+            g2D.drawImage(chaser.pic, (int) Math.round(chaser.getX()), (int) Math.round(chaser.getY()), chaser.width, chaser.height, null, this);
+        }
         //coin
         if (coin != null){
             g2D.drawImage(coin.pic, (int)Math.round(coin.getX()), (int)Math.round(coin.getY()), coin.width, coin.height, null, this);
@@ -68,16 +96,23 @@ public class Panel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timer) {
             runner.move();
-            chaser.move();
-            chaser.chase(runner.getX(), runner.getY());
+
+            for (var chaser : chasers) {
+                chaser.move();
+                //chaser.chase(runner.getX(), runner.getY());
+            }
 
             runner.velX = 0;
             runner.velY = 0;
             runner.chase(coin.getX(), coin.getY());
-            runner.fuzzyControl(chaser.getX(), chaser.getY());
+            for (var chaser : chasers) {
+                runner.fuzzyControl(chaser.getX(), chaser.getY());
+            }
 
-            if (runner.checkCollision(chaser.getX(), chaser.getY(), chaser.width, chaser.height)){
-                score -= 1;
+            for (var chaser : chasers) {
+                if (runner.checkCollision(chaser.getX(), chaser.getY(), chaser.width, chaser.height)) {
+                    score -= 1;
+                }
             }
 
             if (runner.checkCollision(coin.getX(), coin.getY(), coin.width, coin.height)){
