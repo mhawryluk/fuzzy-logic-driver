@@ -17,18 +17,17 @@ TERM veryCloseRight := (750, 0) (775, 1) (800, 1);
 END_FUZZIFY
 
 FUZZIFY chaserDist
-TERM veryCloseLeft := (-125, 0) (-100, 1) (-25, 1) (0, 0);
-TERM closeLeft := (-200, 0) (-150, 1) (-125, 1) (-100, 0);
-TERM middle := (-400, 1) (-200, 1) (-100, 0) (100, 0) (200, 1) (400, 1);
-TERM closeRight := (100, 0) (125, 1) (150, 1) (200, 0);
-TERM veryCloseRight := (0, 0) (25, 1) (100, 1) (125, 0);
+TERM veryCloseLeft := (-50, 0) (-25, 1) (-10, 1) (0, 0);
+TERM closeLeft := (-100, 0) (-80, 1) (-50, 1) (-20, 0);
+TERM far := (-400, 1) (-200, 1) (-100, 0) (100, 0) (200, 1) (400, 1);
+TERM closeRight := (20, 0) (50, 1) (80, 1) (200, 0);
+TERM veryCloseRight := (0, 0) (10, 1) (25, 1) (50, 0);
 END_FUZZIFY
-
 
 DEFUZZIFY velocity_change
 TERM strongRight := (5, 0) (8, 1) (10, 1);
 TERM right := (2, 0) (4, 1) (5, 1) (7, 0);
-TERM stay := (-4, 0) (-2, 1) (2, 1) (4, 0);
+TERM stay := (-2, 0) (-1, 1) (1, 1) (2, 0);
 TERM left := (-7, 0) (-5, 1) (-4, 1) (-2, 0);
 TERM strongLeft := (-10, 1) (-8, 1) (-5, 0);
 
@@ -53,11 +52,11 @@ RULE 7: IF position IS middle AND chaserDist IS closeLeft THEN velocity_change I
 RULE 8: IF position IS closeRight AND chaserDist IS closeLeft THEN velocity_change IS stay;
 RULE 9: IF position IS veryCloseRight AND chaserDist IS closeLeft THEN velocity_change IS strongLeft;
 
-RULE 10: IF position IS veryCloseLeft AND chaserDist IS middle THEN velocity_change IS strongRight;
-RULE 11: IF position IS closeLeft AND chaserDist IS middle THEN velocity_change IS right;
-RULE 12: IF position IS middle AND chaserDist IS middle THEN velocity_change IS stay;
-RULE 13: IF position IS closeRight AND chaserDist IS middle THEN velocity_change IS left;
-RULE 14: IF position IS veryCloseRight AND chaserDist IS middle THEN velocity_change IS strongLeft;
+RULE 10: IF position IS veryCloseLeft AND chaserDist IS far THEN velocity_change IS strongRight;
+RULE 11: IF position IS closeLeft AND chaserDist IS far THEN velocity_change IS right;
+RULE 12: IF position IS middle AND chaserDist IS far THEN velocity_change IS stay;
+RULE 13: IF position IS closeRight AND chaserDist IS far THEN velocity_change IS left;
+RULE 14: IF position IS veryCloseRight AND chaserDist IS far THEN velocity_change IS strongLeft;
 
 RULE 15: IF position IS veryCloseLeft AND chaserDist IS closeRight THEN velocity_change IS strongRight;
 RULE 16: IF position IS closeLeft AND chaserDist IS closeRight THEN velocity_change IS stay;

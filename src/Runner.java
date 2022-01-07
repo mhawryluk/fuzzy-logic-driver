@@ -17,7 +17,7 @@ public class Runner extends BoardObject{
         double velocityChangeY = fuzzyController.getVelocityChange(y, chaserY - y);
 
         if (!Double.isNaN(velocityChangeX) && !Double.isNaN(velocityChangeY)){
-            changeVelocity((int) velocityChangeX, (int)velocityChangeY);
+            changeVelocity(velocityChangeX, velocityChangeY);
         }
 
 //        System.out.println(velocityChangeX + " " + velocityChangeY);
