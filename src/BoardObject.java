@@ -7,6 +7,7 @@ public class BoardObject {
     public int width, height;
 
     public double velX = 0, velY = 0;
+    public double fuzzyVelX = 0, fuzzyVelY = 0;
     public final double velValue = 4;
 
     public Image pic;
@@ -17,8 +18,17 @@ public class BoardObject {
     public double getY(){ return y;}
 
     public void move(){
-        x += velX;
-        y += velY;
+        x += velX + fuzzyVelX;
+        y += velY + fuzzyVelY;
+
+        wrap(800, 800);
+    }
+
+    public void wrap(int boardWidth, int boardHeight){
+        if (x > boardWidth) x -= boardWidth;
+        if (x < 0) x += boardWidth;
+        if (y > boardHeight) y -= boardHeight;
+        if (y < 0) y += boardHeight;
     }
 
     public void changeVelocity(double x_change, double y_change){
@@ -36,8 +46,8 @@ public class BoardObject {
         this.y = y;
     }
 
-    public void chase(double targertX, double targetY){
-        double steer_x = targertX - x;
+    public void chase(double targetX, double targetY){
+        double steer_x = targetX - x;
         double steer_y = targetY - y;
 
         changeVelocity(steer_x, steer_y);

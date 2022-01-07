@@ -11,6 +11,7 @@ public class Panel extends JPanel implements ActionListener {
     private final Timer timer;
     private Coin coin = new Coin();
     private int score = 0;
+    private long frame = 0;
 
     private final int fontSize = 50;
     private final Font font = new Font(Font.SANS_SERIF, Font.BOLD, fontSize);
@@ -89,24 +90,19 @@ public class Panel extends JPanel implements ActionListener {
         // score
         g2D.setPaint(new Color(255, 255, 255));
         g2D.setFont(font);
-        g2D.drawString("score: "+score, 400, 750);
+        g2D.drawString("score: "+ score, 400, 750);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == timer) {
+            frame++;
             runner.move();
 
-            for (var chaser : chasers) {
-                chaser.move();
-                //chaser.chase(runner.getX(), runner.getY());
-            }
+            if (frame % 50 == 0) runner.noiseRun();
 
-            runner.velX = 0;
-            runner.velY = 0;
-            runner.chase(coin.getX(), coin.getY());
             for (var chaser : chasers) {
-                runner.fuzzyControl(chaser.getX(), chaser.getY());
+                runner.fuzzyControl(chaser.getX(), chaser.getY(), coin.getX(), coin.getY());
             }
 
             for (var chaser : chasers) {
