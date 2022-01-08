@@ -63,8 +63,8 @@ RULE 16: IF coinDist IS veryCloseRight AND chaserDist IS far THEN velocity_chang
 RULE 15: IF coinDist IS closeRight AND chaserDist IS far THEN velocity_change IS right;
 RULE 17: IF coinDist IS farRight AND chaserDist IS far THEN velocity_change IS strongRight;
 
-RULE 17: IF coinDist IS farLeft AND chaserDist IS closeRight THEN velocity_change IS strongRight;
-RULE 16: IF coinDist IS closeLeft AND chaserDist IS closeRight THEN velocity_change IS strongRight;
+RULE 17: IF coinDist IS farLeft AND chaserDist IS closeRight THEN velocity_change IS strongLeft;
+RULE 16: IF coinDist IS closeLeft AND chaserDist IS closeRight THEN velocity_change IS strongLeft;
 RULE 15: IF coinDist IS veryCloseLeft AND chaserDist IS closeRight THEN velocity_change IS left;
 RULE 19: IF coinDist IS veryCloseRight AND chaserDist IS closeRight THEN velocity_change IS stay;
 RULE 18: IF coinDist IS closeRight AND chaserDist IS closeRight THEN velocity_change IS stay;

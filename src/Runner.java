@@ -8,7 +8,7 @@ public class Runner extends BoardObject{
     private final Random noiseX = new Random();
     private final Random noiseY = new Random();
 
-    private final double velVal = 4;
+    private final double velVal = 2;
 
     public Runner(){
         changePosition();
@@ -18,8 +18,8 @@ public class Runner extends BoardObject{
     }
 
     public void fuzzyControl(double chaserX, double chaserY, double coinX, double coinY) {
-        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x);
-        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y);
+        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x)*2;
+        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y)*2;
     }
 
     public boolean checkCollision(double x, double y, int width, int height) {
