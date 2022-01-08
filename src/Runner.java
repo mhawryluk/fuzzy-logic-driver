@@ -11,6 +11,7 @@ public class Runner extends BoardObject{
     private int lives = 5;
 
     private final double velVal = 2;
+    private final double steerVal = 2;
 
     public Runner(){
         changePosition();
@@ -23,15 +24,20 @@ public class Runner extends BoardObject{
         fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y);
     }
 
-    public boolean checkCollision(double x, double y, int size) {
-        return Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) < Math.pow(size/2., 2);
-    }
+
 
     public void noiseRun() {
-        velX = noiseX.nextGaussian();
-        velY = noiseY.nextGaussian();
+        double steerX = noiseX.nextGaussian();
+        double steerY = noiseY.nextGaussian();
 
-        double vel = Math.sqrt(velX*velX + velY*velY);
+        double vel = Math.sqrt(steerX*steerX + steerY*steerY);
+        steerX *= (steerVal/vel);
+        steerY *= (steerVal/vel);
+
+        velX += steerX;
+        velY += steerY;
+
+        vel = Math.sqrt(velX*velX + velY*velY);
         velX *= (velVal/vel);
         velY *= (velVal/vel);
 

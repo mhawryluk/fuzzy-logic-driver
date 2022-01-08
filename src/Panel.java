@@ -9,7 +9,7 @@ public class Panel extends JPanel implements ActionListener {
     private final Runner runner;
     private final ArrayList<Obstacle> obstacles = new ArrayList<>();
     private final Timer timer;
-    private Coin coin = new Coin();
+    private Coin coin;
     private final int heartSize = 50;
     private final Image heartPic = new ImageIcon("pics/heart.png").getImage().getScaledInstance(heartSize, heartSize, Image.SCALE_DEFAULT);
 
@@ -29,6 +29,7 @@ public class Panel extends JPanel implements ActionListener {
 
         this.runner = new Runner();
         obstacles.add(new Obstacle());
+        coin = new Coin(obstacles);
 
         timer = new Timer(50, this);
         timer.start();
@@ -129,7 +130,7 @@ public class Panel extends JPanel implements ActionListener {
             frame++;
             runner.move();
 
-            if (frame % 50 == 0) runner.noiseRun();
+            if (frame % 20 == 0) runner.noiseRun();
 
             for (var chaser : obstacles) {
                 runner.fuzzyControl(chaser.getX(), chaser.getY(), coin.getX(), coin.getY());

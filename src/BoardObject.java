@@ -38,6 +38,10 @@ public class BoardObject {
         if (y < 0) y += boardHeight;
     }
 
+    public boolean checkCollision(double x, double y, int size) {
+        return Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) < Math.pow(size/2., 2);
+    }
+
     public void changeVelocity(double x_change, double y_change){
         velX += x_change;
         velY += y_change;
