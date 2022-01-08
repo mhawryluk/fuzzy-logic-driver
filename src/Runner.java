@@ -8,6 +8,8 @@ public class Runner extends BoardObject{
     private final Random noiseX = new Random();
     private final Random noiseY = new Random();
 
+    private int lives = 5;
+
     private final double velVal = 2;
 
     public Runner(){
@@ -22,7 +24,7 @@ public class Runner extends BoardObject{
     }
 
     public boolean checkCollision(double x, double y, int size) {
-        return Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) < Math.pow(size, 2);
+        return Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) < Math.pow(size/2., 2);
     }
 
     public void noiseRun() {
@@ -36,5 +38,13 @@ public class Runner extends BoardObject{
 //        System.out.println(velX + " " + velY);
     }
 
+    public void lifeDelta(int delta){
+        lives += delta;
+        if (lives > 5) lives = 5;
+        if (lives < 0) lives = 0;
+    }
 
+    public int getLives(){
+        return lives;
+    }
 }
