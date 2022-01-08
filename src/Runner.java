@@ -12,23 +12,17 @@ public class Runner extends BoardObject{
 
     public Runner(){
         changePosition();
-        width = 50;
-        height = 50;
-        pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        size = 50;
+        pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(size, size, Image.SCALE_DEFAULT);
     }
 
     public void fuzzyControl(double chaserX, double chaserY, double coinX, double coinY) {
-        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x)*2;
-        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y)*2;
+        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x);
+        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y);
     }
 
-    public boolean checkCollision(double x, double y, int width, int height) {
-        if (this.x > x + width) return false;
-        if (this.y > y + height) return false;
-        if (this.x + this.width < x) return false;
-        if (this.y + this.height < y) return false;
-
-        return true;
+    public boolean checkCollision(double x, double y, int size) {
+        return Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2) < Math.pow(size, 2);
     }
 
     public void noiseRun() {

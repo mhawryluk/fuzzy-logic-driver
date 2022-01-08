@@ -3,11 +3,10 @@ import java.awt.*;
 
 public class Coin extends BoardObject{
 
-    public final int width=50, height=50;
 
     public Coin() {
+        size = 50;
         changePosition();
+        pic = new ImageIcon("pics/coin.png").getImage().getScaledInstance(size, size, Image.SCALE_DEFAULT);
     }
-
-    protected Image pic = new ImageIcon("pics/coin.png").getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
 }

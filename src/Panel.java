@@ -76,21 +76,49 @@ public class Panel extends JPanel implements ActionListener {
         g2D.fillRect(50, 50, this.width-100, this.height-100);
 
         // runner
-        g2D.drawImage(runner.pic, (int)Math.round(runner.getX()), (int)Math.round(runner.getY()), runner.width, runner.height, null, this);
+        g2D.drawImage(runner.pic, runner.getDrawX(), runner.getDrawY(), runner.size, runner.size, null, this);
+
+        int arrowScale = 20;
+        g2D.setPaint(new Color(19, 142, 225));
+        drawArrowLine(g2D, (int)Math.round(runner.getX()), (int)Math.round(runner.getY()), (int)(Math.round(runner.getX()) + runner.fuzzyVelX*arrowScale), (int)(Math.round(runner.getY())+runner.fuzzyVelY*arrowScale), 5, 5);
+
+        g2D.setPaint(new Color(208, 150, 10));
+        drawArrowLine(g2D, (int)Math.round(runner.getX()), (int)Math.round(runner.getY()), (int)(Math.round(runner.getX()) + runner.velX*arrowScale), (int)(Math.round(runner.getY())+runner.velY*arrowScale), 5, 5);
 
         // chaser
         for (var chaser : chasers) {
-            g2D.drawImage(chaser.pic, (int) Math.round(chaser.getX()), (int) Math.round(chaser.getY()), chaser.width, chaser.height, null, this);
+            g2D.drawImage(chaser.pic, (int) Math.round(chaser.getX()), (int) Math.round(chaser.getY()), chaser.size, chaser.size, null, this);
         }
         //coin
         if (coin != null){
-            g2D.drawImage(coin.pic, (int)Math.round(coin.getX()), (int)Math.round(coin.getY()), coin.width, coin.height, null, this);
+            g2D.drawImage(coin.pic, (int)Math.round(coin.getX()), (int)Math.round(coin.getY()), coin.size, coin.size, null, this);
         }
 
         // score
         g2D.setPaint(new Color(255, 255, 255));
         g2D.setFont(font);
         g2D.drawString("score: "+ score, 400, 750);
+    }
+
+    private void drawArrowLine(Graphics g, int x1, int y1, int x2, int y2, int d, int h) {
+        int dx = x2 - x1, dy = y2 - y1;
+        double D = Math.sqrt(dx*dx + dy*dy);
+        double xm = D - d, xn = xm, ym = h, yn = -h, x;
+        double sin = dy / D, cos = dx / D;
+
+        x = xm*cos - ym*sin + x1;
+        ym = xm*sin + ym*cos + y1;
+        xm = x;
+
+        x = xn*cos - yn*sin + x1;
+        yn = xn*sin + yn*cos + y1;
+        xn = x;
+
+        int[] xpoints = {x2, (int) xm, (int) xn};
+        int[] ypoints = {y2, (int) ym, (int) yn};
+
+        g.drawLine(x1, y1, x2, y2);
+        g.fillPolygon(xpoints, ypoints, 3);
     }
 
     @Override
@@ -106,12 +134,12 @@ public class Panel extends JPanel implements ActionListener {
             }
 
             for (var chaser : chasers) {
-                if (runner.checkCollision(chaser.getX(), chaser.getY(), chaser.width, chaser.height)) {
+                if (runner.checkCollision(chaser.getX(), chaser.getY(), chaser.size)) {
                     score -= 1;
                 }
             }
 
-            if (runner.checkCollision(coin.getX(), coin.getY(), coin.width, coin.height)){
+            if (runner.checkCollision(coin.getX(), coin.getY(), coin.size)){
                 score += 1;
                 coin.changePosition();
             }
@@ -119,4 +147,6 @@ public class Panel extends JPanel implements ActionListener {
 //            System.out.println(runner.velX + " " + runner.velY + " " + chaser.velX + " " + chaser.velY);
         }
     }
+
+
 }

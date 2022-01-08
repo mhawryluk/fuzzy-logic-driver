@@ -4,7 +4,7 @@ import java.util.Random;
 public class BoardObject {
 
     protected double x, y;
-    public int width, height;
+    public int size;
 
     public double velX = 0, velY = 0;
     public double fuzzyVelX = 0, fuzzyVelY = 0;
@@ -16,6 +16,13 @@ public class BoardObject {
 
     public double getX(){ return x;}
     public double getY(){ return y;}
+
+    public int getDrawX(){
+        return (int)(Math.round(x - size/2.));
+    }
+    public int getDrawY(){
+        return (int)(Math.round(y - size/2.));
+    }
 
     public void move(){
         x += velX + fuzzyVelX;

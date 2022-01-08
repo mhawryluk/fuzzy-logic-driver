@@ -27,11 +27,11 @@ TERM veryCloseRight := (0, 0) (10, 1) (25, 1) (50, 0);
 END_FUZZIFY
 
 DEFUZZIFY velocity_change
-TERM strongRight := (2, 0) (4, 1) (5, 1);
-TERM right := (1, 0) (2, 1) (2.5, 1) (3.5, 0);
-TERM stay := (-1, 0) (-0.5, 1) (0.5, 1) (1, 0);
-TERM left := (-3.5, 0) (-2.5, 1) (-2, 1) (-1, 0);
-TERM strongLeft := (-5, 1) (-4, 1) (-2, 0);
+TERM strongRight := (4, 0) (8, 1) (10, 1);
+TERM right := (2, 0) (4, 1) (5, 1) (7, 0);
+TERM stay := (-2, 0) (-1, 1) (1, 1) (2, 0);
+TERM left := (-7, 0) (-5, 1) (-4, 1) (-2, 0);
+TERM strongLeft := (-10, 1) (-8, 1) (-4, 0);
 
 METHOD : COG;
 DEFAULT := 0;
