@@ -52,6 +52,9 @@ for coinDist in coinDists:
                 obstacleDist_ = obstacleDist
                 obstacleDistH_ = obstacleDistH
 
+                # jeśli przeszkoda jest daleko, podążaj za monetą
+                # im jest dalej w tym kierunku, tym składowa na tym kierunku
+                # powinna być większa
                 if obstacleDist == 'far':
                     if coinDistH == 'veryCloseRight':
                         velocityChange = 'right'
@@ -69,12 +72,14 @@ for coinDist in coinDists:
                     coinDist_ = None
                     obstacleDistH_ = None
 
+                # jeśli przeszkoda jest blisko, a moneta daleko
+                # to odskocz mocno od przeszkody
                 elif coinDist == 'far':
                     if obstacleDistH == 'veryCloseRight':
                         velocityChange = 'strongLeft'
                     elif obstacleDistH == 'closeRight':
                         velocityChange = 'strongLeft'
-                    elif obstacleDistH == 'far':
+                    elif obstacleDistH == 'far':  # raczej się nie zdarzy
                         velocityChange = 'stay'
                     elif obstacleDistH == 'closeLeft':
                         velocityChange = 'strongRight'
@@ -83,30 +88,32 @@ for coinDist in coinDists:
 
                     coinDistH_ = None
 
-                else:
+                else:  # i przeszkoda, i moneta są blisko obiektu
                     if obstacleDistH == 'veryCloseRight' and coinDistH == 'veryCloseRight':
-                        velocityChange = 'left'
+                        velocityChange = 'left'  # jak obie są blisko to bezpieczniej odskoczyć
                     elif obstacleDistH == 'veryCloseLeft' and coinDistH == 'veryCloseLeft':
-                        velocityChange = 'right'
+                        velocityChange = 'right'  # symetrycznie do tego co powyżej
                     elif obstacleDistH == 'veryCloseLeft' and coinDistH == 'closeLeft':
-                        velocityChange = 'left'
+                        velocityChange = 'right'  # przeszkoda bliżej niż moneta
                     elif obstacleDistH == 'veryCloseRight' and coinDistH == 'closeRight':
-                        velocityChange = 'right'
+                        velocityChange = 'left'  # przeszkoda bliżej niż moneta
                     elif obstacleDistH == 'closeLeft' and coinDistH == 'veryCloseLeft':
-                        velocityChange = 'right'
+                        velocityChange = 'left'  # moneta bliżej niż przeszkoda
                     elif obstacleDistH == 'closeRight' and coinDistH == 'veryCloseRight':
-                        velocityChange = 'left'
+                        velocityChange = 'right'  # moneta bliżej niż przeszkoda
 
+                    # odskocz od przeszkody
                     elif obstacleDistH.endswith('Right'):
                         velocityChange = 'left'
 
-                    elif obstacleDist.endswith('Left'):
+                    # odskocz od przeszkody
+                    elif obstacleDistH.endswith('Left'):
                         velocityChange = 'right'
 
-                    elif coinDist.endswith('Left'):
+                    elif coinDistH.endswith('Left'):  # podążaj za monetą
                         velocityChange = 'left'
 
-                    elif coinDist.endswith('Right'):
+                    elif coinDistH.endswith('Right'):  # podążaj za monetą
                         velocityChange = 'right'
 
                 printRule(coinDist_, obstacleDist_, coinDistH_,

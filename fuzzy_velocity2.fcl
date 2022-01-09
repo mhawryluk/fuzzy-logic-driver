@@ -65,37 +65,36 @@ RULE 7: IF coinDist IS far AND obstacleDist IS close AND obstacleDistH IS closeL
 RULE 8: IF coinDist IS far AND obstacleDist IS close AND obstacleDistH IS far THEN velocityChange is stay;
 RULE 9: IF coinDist IS far AND obstacleDist IS close AND obstacleDistH IS closeRight THEN velocityChange is strongLeft;
 RULE 10: IF coinDist IS far AND obstacleDist IS close AND obstacleDistH IS veryCloseRight THEN velocityChange is strongLeft;
-RULE 11: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS veryCloseLeft THEN velocityChange is stay;
-RULE 12: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS closeLeft THEN velocityChange is stay;
-RULE 13: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS far THEN velocityChange is stay;
+RULE 11: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS veryCloseLeft THEN velocityChange is right;
+RULE 12: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS closeLeft THEN velocityChange is right;
+RULE 13: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS far THEN velocityChange is left;
 RULE 14: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS closeRight THEN velocityChange is left;
 RULE 15: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farLeft AND obstacleDistH IS veryCloseRight THEN velocityChange is left;
-RULE 16: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS veryCloseLeft THEN velocityChange is stay;
-RULE 17: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS closeLeft THEN velocityChange is stay;
-RULE 18: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS far THEN velocityChange is stay;
+RULE 16: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS veryCloseLeft THEN velocityChange is right;
+RULE 17: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS closeLeft THEN velocityChange is right;
+RULE 18: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS far THEN velocityChange is right;
 RULE 19: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS closeRight THEN velocityChange is left;
 RULE 20: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS farRight AND obstacleDistH IS veryCloseRight THEN velocityChange is left;
-RULE 21: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS veryCloseLeft THEN velocityChange is left;
-RULE 22: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS closeLeft THEN velocityChange is stay;
-RULE 23: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS far THEN velocityChange is stay;
+RULE 21: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS veryCloseLeft THEN velocityChange is right;
+RULE 22: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS closeLeft THEN velocityChange is right;
+RULE 23: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS far THEN velocityChange is left;
 RULE 24: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS closeRight THEN velocityChange is left;
 RULE 25: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeLeft AND obstacleDistH IS veryCloseRight THEN velocityChange is left;
-RULE 26: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS veryCloseLeft THEN velocityChange is stay;
-RULE 27: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS closeLeft THEN velocityChange is stay;
-RULE 28: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS far THEN velocityChange is stay;
+RULE 26: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS veryCloseLeft THEN velocityChange is right;
+RULE 27: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS closeLeft THEN velocityChange is right;
+RULE 28: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS far THEN velocityChange is right;
 RULE 29: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS closeRight THEN velocityChange is left;
-RULE 30: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS veryCloseRight THEN velocityChange is right;
+RULE 30: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS closeRight AND obstacleDistH IS veryCloseRight THEN velocityChange is left;
 RULE 31: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS veryCloseLeft THEN velocityChange is right;
-RULE 32: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS closeLeft THEN velocityChange is right;
-RULE 33: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS far THEN velocityChange is stay;
+RULE 32: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS closeLeft THEN velocityChange is left;
+RULE 33: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS far THEN velocityChange is left;
 RULE 34: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS closeRight THEN velocityChange is left;
 RULE 35: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseLeft AND obstacleDistH IS veryCloseRight THEN velocityChange is left;
-RULE 36: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS veryCloseLeft THEN velocityChange is stay;
-RULE 37: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS closeLeft THEN velocityChange is stay;
-RULE 38: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS far THEN velocityChange is stay;
-RULE 39: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS closeRight THEN velocityChange is left;
+RULE 36: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS veryCloseLeft THEN velocityChange is right;
+RULE 37: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS closeLeft THEN velocityChange is right;
+RULE 38: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS far THEN velocityChange is right;
+RULE 39: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS closeRight THEN velocityChange is right;
 RULE 40: IF coinDist IS close AND obstacleDist IS close AND coinDistH IS veryCloseRight AND obstacleDistH IS veryCloseRight THEN velocityChange is left;
-
 
 END_RULEBLOCK
 
