@@ -28,6 +28,7 @@ public class Panel extends JPanel implements ActionListener {
         requestFocus();
 
         this.runner = new Runner();
+        System.out.println(runner.getX());
         obstacles.add(new Obstacle());
         coin = new Coin(obstacles);
 
@@ -66,6 +67,8 @@ public class Panel extends JPanel implements ActionListener {
     public void paint(Graphics g){
         Graphics2D g2D = (Graphics2D) g;
         super.repaint();
+
+//        System.out.println(runner.getX());
 
         if (!hasFocus()) requestFocus();
 

@@ -11,13 +11,14 @@ public class FuzzyControl {
     }
 
     public double getVelocityChange(double coinDist, double chaserDist){
+//        System.out.println("coin dist: " + coinDist + " chaser dist: " + chaserDist);
         fuzzyRuleSet.setVariable("coinDist", coinDist);
         fuzzyRuleSet.setVariable("chaserDist", chaserDist);
 
         fuzzyRuleSet.evaluate();
 
         double change = fuzzyRuleSet.getVariable("velocity_change").defuzzify();
-        System.out.println("coin dist: " + coinDist + " chaser dist: " + chaserDist + " change: " + change);
+//        System.out.println("coin dist: " + coinDist + " chaser dist: " + chaserDist + " change: " + change);
         return change;
     }
 }
