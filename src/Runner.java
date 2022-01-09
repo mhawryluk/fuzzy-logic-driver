@@ -24,8 +24,10 @@ public class Runner extends BoardObject{
     }
 
     public void fuzzyControl(double chaserX, double chaserY, double coinX, double coinY) {
-        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x);
-        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y);
+        double coinDist = Math.sqrt(Math.pow((coinX - x), 2) + Math.pow(coinY - y, 2));
+        double chaserDist = Math.sqrt(Math.pow((chaserX - x), 2) + Math.pow(chaserY - y, 2));
+        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x, coinDist, chaserDist);
+        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y, coinDist, chaserDist);
     }
 
     public void move(){
