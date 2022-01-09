@@ -54,6 +54,7 @@ public class Panel extends JPanel implements ActionListener {
             public void keyPressed(KeyEvent keyEvent) {
                 if (keyEvent.getKeyChar() == ' '){
                     obstacles.removeAll(obstacles);
+                    obstacles.add(new Obstacle());
                 }
             }
 
@@ -89,9 +90,9 @@ public class Panel extends JPanel implements ActionListener {
         g2D.setPaint(new Color(208, 150, 10));
         drawArrowLine(g2D, (int)Math.round(runner.getX()), (int)Math.round(runner.getY()), (int)(Math.round(runner.getX()) + runner.velX*arrowScale), (int)(Math.round(runner.getY())+runner.velY*arrowScale));
 
-        // chaser
-        for (var chaser : obstacles) {
-            g2D.drawImage(chaser.pic, chaser.getDrawX(), chaser.getDrawY(), chaser.size, chaser.size, null, this);
+        // obstacle
+        for (var obstacle : obstacles) {
+            g2D.drawImage(obstacle.pic, obstacle.getDrawX(), obstacle.getDrawY(), obstacle.size, obstacle.size, null, this);
         }
         //coin
         if (coin != null){
@@ -135,14 +136,14 @@ public class Panel extends JPanel implements ActionListener {
 
             if (frame % 20 == 0) runner.noiseRun();
 
-            for (var chaser : obstacles) {
-                runner.fuzzyControl(chaser.getX(), chaser.getY(), coin.getX(), coin.getY());
+            for (var obstacle : obstacles) {
+                runner.fuzzyControl(obstacle.getX(), obstacle.getY(), coin.getX(), coin.getY());
             }
 
-            for (var chaser : obstacles) {
-                if (runner.checkCollision(chaser.getX(), chaser.getY(), chaser.size)) {
+            for (var obstacle : obstacles) {
+                if (runner.checkCollision(obstacle.getX(), obstacle.getY(), obstacle.size)) {
                     runner.lifeDelta(-1);
-                    chaser.changePosition();
+                    obstacle.changePosition();
                 }
             }
 

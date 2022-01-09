@@ -2,7 +2,7 @@ FUNCTION_BLOCK
 
 VAR_INPUT
 coinDist : REAL;
-chaserDist : REAL;
+obstacleDist : REAL;
 END_VAR
 
 VAR_OUTPUT
@@ -18,7 +18,7 @@ TERM closeRight := (20, 0) (50, 1) (80, 1) (100, 0);
 TERM farRight := (80, 0) (100, 1) (800, 1);
 END_FUZZIFY
 
-FUZZIFY chaserDist
+FUZZIFY obstacleDist
 TERM veryCloseLeft := (-50, 0) (-25, 1) (-10, 1) (0, 0);
 TERM closeLeft := (-100, 0) (-80, 1) (-50, 1) (-20, 0);
 TERM far := (-800, 1) (-100, 1) (-80, 0) (80, 0) (100, 1) (800, 1);
@@ -42,40 +42,40 @@ RULEBLOCK first
 AND: MIN;
 ACT: MIN;
 
-RULE 0: IF coinDist IS farLeft AND chaserDist IS veryCloseLeft THEN velocity_change IS stay;
-RULE 1: IF coinDist IS closeLeft AND chaserDist IS veryCloseLeft THEN velocity_change IS stay;
-RULE 2: IF coinDist IS veryCloseLeft AND chaserDist IS veryCloseLeft THEN velocity_change IS stay;
-RULE 3: IF coinDist IS veryCloseRight AND chaserDist IS veryCloseLeft THEN velocity_change IS right;
-RULE 4: IF coinDist IS closeRight AND chaserDist IS veryCloseLeft THEN velocity_change IS strongRight;
-RULE 5: IF coinDist IS farRight AND chaserDist IS veryCloseLeft THEN velocity_change IS strongRight;
+RULE 0: IF coinDist IS farLeft AND obstacleDist IS veryCloseLeft THEN velocity_change IS stay;
+RULE 1: IF coinDist IS closeLeft AND obstacleDist IS veryCloseLeft THEN velocity_change IS stay;
+RULE 2: IF coinDist IS veryCloseLeft AND obstacleDist IS veryCloseLeft THEN velocity_change IS stay;
+RULE 3: IF coinDist IS veryCloseRight AND obstacleDist IS veryCloseLeft THEN velocity_change IS right;
+RULE 4: IF coinDist IS closeRight AND obstacleDist IS veryCloseLeft THEN velocity_change IS strongRight;
+RULE 5: IF coinDist IS farRight AND obstacleDist IS veryCloseLeft THEN velocity_change IS strongRight;
 
-RULE 6: IF coinDist IS farLeft AND chaserDist IS closeLeft THEN velocity_change IS left;
-RULE 7: IF coinDist IS closeLeft AND chaserDist IS closeLeft THEN velocity_change IS stay;
-RULE 8: IF coinDist IS veryCloseLeft AND chaserDist IS closeLeft THEN velocity_change IS stay;
-RULE 9: IF coinDist IS veryCloseRight AND chaserDist IS closeLeft THEN velocity_change IS right;
-RULE 10: IF coinDist IS closeRight AND chaserDist IS closeLeft THEN velocity_change IS strongRight;
-RULE 11: IF coinDist IS farRight AND chaserDist IS closeLeft THEN velocity_change IS strongRight;
+RULE 6: IF coinDist IS farLeft AND obstacleDist IS closeLeft THEN velocity_change IS left;
+RULE 7: IF coinDist IS closeLeft AND obstacleDist IS closeLeft THEN velocity_change IS stay;
+RULE 8: IF coinDist IS veryCloseLeft AND obstacleDist IS closeLeft THEN velocity_change IS stay;
+RULE 9: IF coinDist IS veryCloseRight AND obstacleDist IS closeLeft THEN velocity_change IS right;
+RULE 10: IF coinDist IS closeRight AND obstacleDist IS closeLeft THEN velocity_change IS strongRight;
+RULE 11: IF coinDist IS farRight AND obstacleDist IS closeLeft THEN velocity_change IS strongRight;
 
-RULE 14: IF coinDist IS farLeft AND chaserDist IS far THEN velocity_change IS strongLeft;
-RULE 13: IF coinDist IS closeLeft AND chaserDist IS far THEN velocity_change IS left;
-RULE 12: IF coinDist IS veryCloseLeft AND chaserDist IS far THEN velocity_change IS stay;
-RULE 16: IF coinDist IS veryCloseRight AND chaserDist IS far THEN velocity_change IS stay;
-RULE 15: IF coinDist IS closeRight AND chaserDist IS far THEN velocity_change IS right;
-RULE 17: IF coinDist IS farRight AND chaserDist IS far THEN velocity_change IS strongRight;
+RULE 14: IF coinDist IS farLeft AND obstacleDist IS far THEN velocity_change IS strongLeft;
+RULE 13: IF coinDist IS closeLeft AND obstacleDist IS far THEN velocity_change IS left;
+RULE 12: IF coinDist IS veryCloseLeft AND obstacleDist IS far THEN velocity_change IS stay;
+RULE 16: IF coinDist IS veryCloseRight AND obstacleDist IS far THEN velocity_change IS stay;
+RULE 15: IF coinDist IS closeRight AND obstacleDist IS far THEN velocity_change IS right;
+RULE 17: IF coinDist IS farRight AND obstacleDist IS far THEN velocity_change IS strongRight;
 
-RULE 17: IF coinDist IS farLeft AND chaserDist IS closeRight THEN velocity_change IS strongLeft;
-RULE 16: IF coinDist IS closeLeft AND chaserDist IS closeRight THEN velocity_change IS strongLeft;
-RULE 15: IF coinDist IS veryCloseLeft AND chaserDist IS closeRight THEN velocity_change IS left;
-RULE 19: IF coinDist IS veryCloseRight AND chaserDist IS closeRight THEN velocity_change IS stay;
-RULE 18: IF coinDist IS closeRight AND chaserDist IS closeRight THEN velocity_change IS stay;
-RULE 17: IF coinDist IS farRight AND chaserDist IS closeRight THEN velocity_change IS right;
+RULE 17: IF coinDist IS farLeft AND obstacleDist IS closeRight THEN velocity_change IS strongLeft;
+RULE 16: IF coinDist IS closeLeft AND obstacleDist IS closeRight THEN velocity_change IS strongLeft;
+RULE 15: IF coinDist IS veryCloseLeft AND obstacleDist IS closeRight THEN velocity_change IS left;
+RULE 19: IF coinDist IS veryCloseRight AND obstacleDist IS closeRight THEN velocity_change IS stay;
+RULE 18: IF coinDist IS closeRight AND obstacleDist IS closeRight THEN velocity_change IS stay;
+RULE 17: IF coinDist IS farRight AND obstacleDist IS closeRight THEN velocity_change IS right;
 
-RULE 18: IF coinDist IS farLeft AND chaserDist IS veryCloseRight THEN velocity_change IS strongLeft;
-RULE 19: IF coinDist IS closeLeft AND chaserDist IS veryCloseRight THEN velocity_change IS strongLeft;
-RULE 20: IF coinDist IS veryCloseLeft AND chaserDist IS veryCloseRight THEN velocity_change IS left;
-RULE 21: IF coinDist IS veryCloseRight AND chaserDist IS veryCloseRight THEN velocity_change IS stay;
-RULE 22: IF coinDist IS closeRight AND chaserDist IS veryCloseRight THEN velocity_change IS stay;
-RULE 23: IF coinDist IS farRight AND chaserDist IS veryCloseRight THEN velocity_change IS stay;
+RULE 18: IF coinDist IS farLeft AND obstacleDist IS veryCloseRight THEN velocity_change IS strongLeft;
+RULE 19: IF coinDist IS closeLeft AND obstacleDist IS veryCloseRight THEN velocity_change IS strongLeft;
+RULE 20: IF coinDist IS veryCloseLeft AND obstacleDist IS veryCloseRight THEN velocity_change IS left;
+RULE 21: IF coinDist IS veryCloseRight AND obstacleDist IS veryCloseRight THEN velocity_change IS stay;
+RULE 22: IF coinDist IS closeRight AND obstacleDist IS veryCloseRight THEN velocity_change IS stay;
+RULE 23: IF coinDist IS farRight AND obstacleDist IS veryCloseRight THEN velocity_change IS stay;
 
 END_RULEBLOCK
 

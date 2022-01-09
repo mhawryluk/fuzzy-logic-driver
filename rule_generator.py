@@ -1,60 +1,106 @@
-coinDistHs = ['far' + dir for dir in ('Left', 'Right')]
-coinDistHs += ['close' + dir for dir in ('Left', 'Right')]
-coinDistHs += ['veryClose' + dir for dir in ('Left', 'Right')]
+coinDistHs = ['farLeft', 'farRight', 'closeLeft',
+              'closeRight', 'veryCloseLeft', 'veryCloseRight']
+obstacleDistHs = ['veryCloseLeft', 'closeLeft',
+                  'far', 'closeRight', 'veryCloseRight']
 
 coinDists = ['far', 'close']
-chaserDists = ['far', 'close']
+obstacleDists = ['far', 'close']
 
-chaserDistHs = ['veryCloseLeft', 'closeLeft', 'far', 'closeRight', 'veryCloseRight']
 
 ruleNo = 0
+rules = set()
 
 
-def printRule(coinDist, chaserDist, coinDistH, chaserDistH, velocityChange):
+def printRule(coinDist, obstacleDist, coinDistH, obstacleDistH, velocityChange):
     global ruleNo
-    print(f'RULE {ruleNo}: IF coinDist IS {coinDist} AND chaserDist IS {chaserDist} AND coinDistH IS {coinDistH} AND chaserDistH IS {chaserDistH} THEN velocityChange is {velocityChange};')
+
+    if (coinDist, obstacleDist, coinDistH, obstacleDistH) in rules:
+        return
+    rules.add((coinDist, obstacleDist, coinDistH, obstacleDistH))
+
+    rule = f'RULE {ruleNo}: IF '
+    if coinDist is not None:
+        rule += f'coinDist IS {coinDist} '
+
+    if obstacleDist is not None:
+        if not rule.endswith('IF '):
+            rule += 'AND '
+        rule += f'obstacleDist IS {obstacleDist} '
+
+    if coinDistH is not None:
+        if not rule.endswith('IF '):
+            rule += 'AND '
+        rule += f'coinDistH IS {coinDistH} '
+
+    if obstacleDistH is not None:
+        if not rule.endswith('IF '):
+            rule += 'AND '
+        rule += f'obstacleDistH IS {obstacleDistH} '
+
+    rule += f'THEN velocityChange is {velocityChange};'
+    print(rule)
     ruleNo += 1
 
 
 for coinDist in coinDists:
-    for chaserDist in chaserDists:
+    for obstacleDist in obstacleDists:
         for coinDistH in coinDistHs:
-            for chaserDistH in chaserDistHs:
+            for obstacleDistH in obstacleDistHs:
                 velocityChange = 'stay'
+                coinDist_ = coinDist
+                coinDistH_ = coinDistH
+                obstacleDist_ = obstacleDist
+                obstacleDistH_ = obstacleDistH
 
-                if chaserDist == 'far':
-                    if coinDistH == 'veryCloseRight': velocityChange = 'right'
-                    elif coinDistH == 'veryCloseLeft': velocityChange = 'left'
-                    elif coinDistH == 'closeRight': velocityChange = 'strongRight'
-                    elif coinDistH == 'closeLeft': velocityChange = 'strongLeft'
-                    elif coinDistH == 'farRight': velocityChange = 'strongRight'
-                    elif coinDistH == 'farLeft': velocityChange = 'strongLeft'
+                if obstacleDist == 'far':
+                    if coinDistH == 'veryCloseRight':
+                        velocityChange = 'right'
+                    elif coinDistH == 'veryCloseLeft':
+                        velocityChange = 'left'
+                    elif coinDistH == 'closeRight':
+                        velocityChange = 'strongRight'
+                    elif coinDistH == 'closeLeft':
+                        velocityChange = 'strongLeft'
+                    elif coinDistH == 'farRight':
+                        velocityChange = 'strongRight'
+                    elif coinDistH == 'farLeft':
+                        velocityChange = 'strongLeft'
+
+                    coinDist_ = None
+                    obstacleDistH_ = None
 
                 elif coinDist == 'far':
-                    if chaserDistH == 'veryCloseRight': velocityChange = 'strongLeft'
-                    elif chaserDistH == 'closeRight': velocityChange = 'strongLeft'
-                    elif chaserDistH == 'far': velocityChange = 'stay'
-                    elif chaserDistH == 'closeLeft': velocityChange = 'strongRight'
-                    elif chaserDistH == 'veryCloseLeft': velocityChange = 'strongRight'
+                    if obstacleDistH == 'veryCloseRight':
+                        velocityChange = 'strongLeft'
+                    elif obstacleDistH == 'closeRight':
+                        velocityChange = 'strongLeft'
+                    elif obstacleDistH == 'far':
+                        velocityChange = 'stay'
+                    elif obstacleDistH == 'closeLeft':
+                        velocityChange = 'strongRight'
+                    elif obstacleDistH == 'veryCloseLeft':
+                        velocityChange = 'strongRight'
+
+                    coinDistH_ = None
 
                 else:
-                    if chaserDistH == 'veryCloseRight' and coinDistH == 'veryCloseRight':
+                    if obstacleDistH == 'veryCloseRight' and coinDistH == 'veryCloseRight':
                         velocityChange = 'left'
-                    elif chaserDistH == 'veryCloseLeft' and coinDistH == 'veryCloseLeft':
+                    elif obstacleDistH == 'veryCloseLeft' and coinDistH == 'veryCloseLeft':
                         velocityChange = 'right'
-                    elif chaserDistH == 'veryCloseLeft' and coinDistH == 'closeLeft':
+                    elif obstacleDistH == 'veryCloseLeft' and coinDistH == 'closeLeft':
                         velocityChange = 'left'
-                    elif chaserDistH == 'veryCloseRight' and coinDistH == 'closeRight':
+                    elif obstacleDistH == 'veryCloseRight' and coinDistH == 'closeRight':
                         velocityChange = 'right'
-                    elif chaserDistH == 'closeLeft' and coinDistH == 'veryCloseLeft':
+                    elif obstacleDistH == 'closeLeft' and coinDistH == 'veryCloseLeft':
                         velocityChange = 'right'
-                    elif chaserDistH == 'closeRight' and coinDistH == 'veryCloseRight':
+                    elif obstacleDistH == 'closeRight' and coinDistH == 'veryCloseRight':
                         velocityChange = 'left'
 
-                    elif chaserDistH.endswith('Right'):
+                    elif obstacleDistH.endswith('Right'):
                         velocityChange = 'left'
-                    
-                    elif chaserDist.endswith('Left'):
+
+                    elif obstacleDist.endswith('Left'):
                         velocityChange = 'right'
 
                     elif coinDist.endswith('Left'):
@@ -62,6 +108,6 @@ for coinDist in coinDists:
 
                     elif coinDist.endswith('Right'):
                         velocityChange = 'right'
-                    
-                
-                printRule(coinDist, chaserDist, coinDistH, chaserDistH, velocityChange)
+
+                printRule(coinDist_, obstacleDist_, coinDistH_,
+                          obstacleDistH_, velocityChange)

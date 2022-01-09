@@ -13,7 +13,7 @@ public class Runner extends BoardObject{
 
     private int lives = 5;
 
-    private final double velVal = 2;
+    private final double velVal = 3;
     private final double steerVal = 0.5;
     private double steerX=0, steerY=0;
 
@@ -23,11 +23,11 @@ public class Runner extends BoardObject{
         pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(size, size, Image.SCALE_DEFAULT);
     }
 
-    public void fuzzyControl(double chaserX, double chaserY, double coinX, double coinY) {
+    public void fuzzyControl(double obstacleX, double obstacleY, double coinX, double coinY) {
         double coinDist = Math.sqrt(Math.pow((coinX - x), 2) + Math.pow(coinY - y, 2));
-        double chaserDist = Math.sqrt(Math.pow((chaserX - x), 2) + Math.pow(chaserY - y, 2));
-        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, chaserX - x, coinDist, chaserDist);
-        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, chaserY - y, coinDist, chaserDist);
+        double obstacleDist = Math.sqrt(Math.pow((obstacleX - x), 2) + Math.pow(obstacleY - y, 2));
+        fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, obstacleX - x, coinDist, obstacleDist);
+        fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, obstacleY - y, coinDist, obstacleDist);
     }
 
     public void move(){
