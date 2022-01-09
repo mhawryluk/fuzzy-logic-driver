@@ -136,9 +136,7 @@ public class Panel extends JPanel implements ActionListener {
 
             if (frame % 20 == 0) runner.noiseRun();
 
-            for (var obstacle : obstacles) {
-                runner.fuzzyControl(obstacle.getX(), obstacle.getY(), coin.getX(), coin.getY());
-            }
+            runner.fuzzyControl(obstacles, coin);
 
             for (var obstacle : obstacles) {
                 if (runner.checkCollision(obstacle.getX(), obstacle.getY(), obstacle.size)) {

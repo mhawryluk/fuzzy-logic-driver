@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Runner extends BoardObject{
@@ -23,12 +24,37 @@ public class Runner extends BoardObject{
         pic = new ImageIcon("pics/cat.png").getImage().getScaledInstance(size, size, Image.SCALE_DEFAULT);
     }
 
-    public void fuzzyControl(double obstacleX, double obstacleY, double coinX, double coinY) {
+    public void fuzzyControl(ArrayList<Obstacle> obstacles, Coin coin) {
+        Obstacle obstacle = getClosestObstacle(obstacles);
+        double coinX = coin.getX();
+        double coinY = coin.getY();
+        double obstacleX = obstacle.getX();
+        double obstacleY = obstacle.getY();
         double coinDist = Math.sqrt(Math.pow((coinX - x), 2) + Math.pow(coinY - y, 2));
         double obstacleDist = Math.sqrt(Math.pow((obstacleX - x), 2) + Math.pow(obstacleY - y, 2));
+
         fuzzyVelX = fuzzyController.getVelocityChange(coinX - x, obstacleX - x, coinDist, obstacleDist);
         fuzzyVelY = fuzzyController.getVelocityChange(coinY - y, obstacleY - y, coinDist, obstacleDist);
     }
+
+    private Obstacle getClosestObstacle(ArrayList<Obstacle> obstacles){
+
+        Obstacle minObstacle = null;
+        double minDist =  Double.POSITIVE_INFINITY;
+        for (var obstacle : obstacles){
+            double obstacleX = obstacle.getX();
+            double obstacleY = obstacle.getY();
+            double obstacleDist = Math.sqrt(Math.pow((obstacleX - x), 2) + Math.pow(obstacleY - y, 2));
+
+            if (obstacleDist < minDist) {
+                minObstacle = obstacle;
+                minDist = obstacleDist;
+            }
+        }
+
+        return minObstacle;
+    }
+
 
     public void move(){
         applySteering();
