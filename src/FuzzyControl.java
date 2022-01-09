@@ -21,7 +21,7 @@ public class FuzzyControl {
         fuzzyRuleSet.evaluate();
 
         double change = fuzzyRuleSet.getVariable("velocityChange").defuzzify();
-//        System.out.println("coin dist: " + coinDist + " obstacle dist: " + obstacleDist + " change: " + change);
+//        System.out.println("coinDistH: " + coinDistH + " coinDist: " + coinDist +" obstacleDistH: " + obstacleDistH + " obstacleDist: "+  obstacleDist + " change: " + change);
         return change;
     }
 }

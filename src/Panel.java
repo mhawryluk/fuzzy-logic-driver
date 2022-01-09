@@ -56,6 +56,15 @@ public class Panel extends JPanel implements ActionListener {
                     obstacles.removeAll(obstacles);
                     obstacles.add(new Obstacle());
                 }
+
+                if (keyEvent.getKeyChar() == 'a'){
+                    timer.stop();
+                }
+
+                if (keyEvent.getKeyChar() == 's'){
+                    timer.restart();
+                }
+
             }
 
             @Override
