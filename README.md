@@ -1,5 +1,7 @@
 # Fuzzy Logic Driver
 
+<img width="314" alt="screenshot1" src="https://user-images.githubusercontent.com/70582973/154812980-2bdf0e05-0f2c-4f74-8b5d-67c075d2fa33.png">
+
 ## Table of Contents
 - [Fuzzy Logic Driver](#fuzzy-logic-driver)
   - [Table of Contents](#table-of-contents)
@@ -22,12 +24,14 @@ The driver uses Fuzzy Logic to control player's movement. It takes 4 inputs, whi
 ## Fuzzy rules and membership functions
 
 * input
+
 ![obstacleDistH](./pics/obstacleDistH.png)
 ![coinDistH](./pics/coinDistH.png)
 ![obstacleDist](./pics/obstacleDist.png)
 ![coinDist](./pics/coinDist.png)
 
 * output
+
 ![velocityChange](./pics/velocityChange.png)
 
 * rules
@@ -53,7 +57,7 @@ The Fuzzy Logic rules were constructed to allow the best steering possible given
 - **Java**
 - jFuzzyLogic
 - Swing
-- Python 3
+- Python 3.9
 
 ## Credits
 Created by [@mhawryluk](https://www.github.com/mhawryluk), 2022.
