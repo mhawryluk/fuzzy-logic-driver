@@ -7,7 +7,7 @@ public class FuzzyControl {
     FuzzyRuleSet fuzzyRuleSet = fis.getFuzzyRuleSet();
 
     public FuzzyControl(){
-        fuzzyRuleSet.chart();
+//        fuzzyRuleSet.chart();
     }
 
     public double getVelocityChange(double coinDistH, double obstacleDistH, double coinDist, double obstacleDist){

@@ -28,7 +28,7 @@ public class Panel extends JPanel implements ActionListener {
         requestFocus();
 
         this.runner = new Runner();
-        System.out.println(runner.getX());
+//        System.out.println(runner.getX());
         obstacles.add(new Obstacle());
         coin = new Coin(obstacles);
 
@@ -156,7 +156,8 @@ public class Panel extends JPanel implements ActionListener {
 
             if (runner.checkCollision(coin.getX(), coin.getY(), coin.size)){
                 runner.lifeDelta(1);
-                coin.changePosition();
+                do coin.changePosition();
+                while (coin.collideWithObstacle(obstacles));
             }
 
         }
